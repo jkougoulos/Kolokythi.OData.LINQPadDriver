@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWpf>true</UseWpf>
+    <AssemblyName>Kolokythi.OData.LINQPadDriver</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>linqpaddriver</PackageTags>
+	<VersionPrefix>0.3.0</VersionPrefix>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>NETCORE</DefineConstants>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/jkougoulos/Kolokythi.OData.LINQPadDriver</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LINQPad.Reference" Version="1.*" />
+    <PackageReference Include="OData2Poco" Version="4.1.0" />
+    <PackageReference Include="Simple.OData.Client" Version="5.26.0" />
+    <PackageReference Include="Uncapsulator" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="ConnectionDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="linqpad-samples\\*.*" />
+    <Folder Include="linqpad-samples\\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild1" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /i/y/s &quot;$(TargetDir)*.*&quot; &quot;%25LocalAppData%25\\LINQPad\\Drivers\\DataContext\\NetCore\\$(TargetName)&quot;" />
+  </Target>
+</Project>

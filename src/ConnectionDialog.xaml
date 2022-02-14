@@ -1,0 +1,67 @@
+<Window x:Class="Kolokythi.OData.LINQPadDriver.ConnectionDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Connection Details"
+	Background="{x:Static SystemColors.ControlBrush}"
+	SizeToContent="Height"
+	Width="400" 
+	WindowStartupLocation="CenterScreen" Height="638">
+	
+	<StackPanel Margin="12,12,12,12">
+
+		<Label Padding="0,0,0,2">Friendly name for this connection (optional):</Label>
+		<TextBox Name="txtFriendlyName" Padding="2" Text="{Binding DisplayName}" />
+
+        <Label>Uri for service</Label>
+        <TextBox Name="UriTextbox" Text="{Binding Uri}" />
+
+        <Label>Username</Label>
+        <TextBox Name="UserNameTextbox" Text="{Binding UserName}" />
+
+        <Label>Password</Label>
+        <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" />
+
+        <Label>Certificate File</Label>
+        <TextBox Name="CertificateTextbox" Text="{Binding CertificateFileName}" />
+
+        <Label>Certificate Password</Label>
+        <PasswordBox x:Name="CertPasswordBox" PasswordChanged="CertPasswordBox_OnPasswordChanged" />
+
+        <DockPanel LastChildFill="False" Margin="0,15,0,0" Height="25">
+			<CheckBox IsChecked="{Binding Persist}" VerticalAlignment="Top" >Remember this connection</CheckBox>
+			<Button Name="btnCancel" DockPanel.Dock="Right" Content="Cancel" Margin="6,0,0,0" Padding="10,3" MinWidth="60" IsCancel="True" TabIndex="2" />
+			<Button Name="btnOK" DockPanel.Dock="Right" Content="OK" Margin="6,0,0,0" Padding="10,3" MinWidth="60" IsDefault="True" TabIndex="1" Click="btnOK_Click" />
+		</DockPanel>
+        <DockPanel LastChildFill="False" Margin="0,10,0,0" Height="20">
+            <CheckBox IsChecked="{Binding MultiNSSupport}"  DockPanel.Dock="Left" >Use service namespaces</CheckBox>
+            <CheckBox IsChecked="{Binding NativeSOC}"  DockPanel.Dock="Right" >Native Simple.Odata.Client on menu</CheckBox>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0,0,0,0" Height="20">
+            <CheckBox IsChecked="{Binding IncludeAnnotations}"  DockPanel.Dock="Left" >Include OData Annotations</CheckBox>
+            <CheckBox IsChecked="{Binding ODataTrace}"  DockPanel.Dock="Left" Margin="10,0,0,0" >Full OData Trace</CheckBox>
+            <CheckBox IsChecked="{Binding ForceJson}"  DockPanel.Dock="Left" Margin="10,0,0,0" >Use Json</CheckBox>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0,0,0,0" Height="40">
+            <CheckBox IsChecked="{Binding Ignore404Exception}" VerticalAlignment="Center" DockPanel.Dock="Left" >Ignore resource not found exception</CheckBox>
+            <Label DockPanel.Dock="Right" Margin="0,0,0,0" VerticalAlignment="Center">Discovery levels</Label>
+            <TextBox PreviewTextInput="NumberValidationTextbox" Width="30" Height="20" Text="{Binding stackDepth}" DockPanel.Dock="Right" />
+            
+        </DockPanel>
+
+
+        <DockPanel  Margin="0,15,0,0" >
+            <Label>Additional Headers</Label>
+            <Button  Padding="4" Content="Remove header" Width="100" HorizontalAlignment="Right" Click="Remove_Click" />
+        </DockPanel>
+        <StackPanel  Margin="0,15,0,0" >
+                <DataGrid Name="CHeaders" MinHeight="120" ItemsSource="{Binding CustomHeaders}" SelectedItem="{Binding SelectedCustomHeader}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="*" Header="Value" Binding="{Binding Value}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button  Padding="4" Content="Test Connection" Width="100" HorizontalAlignment="Right" Click="Test_Connection" />
+        </StackPanel>
+
+    </StackPanel>
+</Window>
