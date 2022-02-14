@@ -25,7 +25,9 @@ In the SQL tab you can monitor the OData requests (thanks to [Uncapsulator](http
 ```
 this.SourceCode
 ```
-will provide the source code used by the driver when accessing the specific OData service. The code includes the POCO definitions, so you can use it as a class in your project by providing only the ODataClientSettings in the constructor.
+will provide the source code used by the driver when accessing the specific OData service. The code includes the POCO definitions, so you can use it as a class in your project by providing only the ODataClientSettings in the constructor.  
+Another nice feature is that you can copy paste the code into a new LINQPad query, add via NuGet the "Simple.OData.Client" and now you don't even need the driver.  
+For the moment you will have to create the ODataClientSettings to pass to the constructor.
 
 ```
 this.MetaData
