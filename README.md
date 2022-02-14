@@ -2,7 +2,7 @@
 An OData v1-v4 Driver for LINQPad based on Simple.OData.Client
 
 ## Disclaimer
-I do not know C#/.NET, but I can write code in C#/.NET. There are probably a lot of bugs, probably more than [250](http://www.ganssle.com/tem/tem299.html#article2). Hopefully I will learn a bit better the various [patterns](https://en.wikipedia.org/wiki/Design_Patterns) and the features of the language, resulting into less code -> less bugs!
+I do not know C#/.NET, but I can write bits and pieces in C#/.NET. There are probably a lot of bugs, probably more than [250](http://www.ganssle.com/tem/tem299.html#article2). Hopefully I will learn a bit better the various [patterns](https://en.wikipedia.org/wiki/Design_Patterns) and the features of the language, resulting into less code -> less bugs!
 
 I have used several parts from another ODataV4 LINQPad driver (https://github.com/meancrazy/LINQPadOData4), especially the part of handling the connection dialogue.
 
@@ -22,13 +22,17 @@ As such, it is preferable to use the native way to access the data (see https://
 In the SQL tab you can monitor the OData requests (thanks to [Uncapsulator](https://github.com/albahari/uncapsulator))
 
 ## Other Features
+
+### DataContext source code
 ```
 this.SourceCode
 ```
 will provide the source code used by the driver when accessing the specific OData service. The code includes the POCO definitions, so you can use it as a class in your project by providing only the ODataClientSettings in the constructor.  
 Another nice feature is that you can copy paste the code into a new LINQPad query, add via NuGet the "Simple.OData.Client" and now you don't even need the driver.  
 For the moment you will have to create the ODataClientSettings to pass to the constructor.
+TODO: provide example
 
+### Service Metadata
 ```
 this.MetaData
 ```
@@ -57,7 +61,7 @@ When anything else, it will be the username for Basic authentication (maybe it w
 
 ### Password
 The password to use in combination with the above defined username. When Default username is used, password can be left empty.
-Note: Passwowrd will be encrypted with WindowsDPAPI, therefore if the .linq file is transferred to a different host, password needs to be defined again. As a workaround, one may specify username empty and provide "Authorization" as additional header with based64 encoded the string "username:password" 
+Note: Password will be encrypted with WindowsDPAPI, therefore if the .linq file is transferred to a different host, password needs to be defined again. As a workaround, one may specify username empty and provide "Authorization" as additional header with based64 encoded the string "username:password" 
 
 ### Certificate file
 Path to a .pfx file containing the certificate and private key
@@ -66,7 +70,7 @@ Path to a .pfx file containing the certificate and private key
 Password used to create the .pfx file. This attribute is also encrypted using DPAPI in .linq file, no workaround available
 
 ### Remember this connection
-Have to figure out myself what it does
+TOCHECK
 
 ### Use service namespaces
 If checked, the driver will use the namespaces defined in the OData service for type names. Otherwise, all types will be created under the (default) LINQPad.User namespace.
@@ -95,5 +99,3 @@ Add headers that should be included in each request. Examples include "sap-clien
 
 ### Test connection
 It will do driver checks (initialize the Datacontext) and fetch the metadata file from the service as a verification of the connectivity
-
-
