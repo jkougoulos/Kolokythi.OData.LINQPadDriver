@@ -1,5 +1,5 @@
 # Kolokythi.OData.LINQPadDriver
-An OData v1-v4 Driver for LINQPad based on Simple.OData.Client
+An OData v1-v4 Driver for LINQPad7 (not tested in LINQPad6, might work) based on Simple.OData.Client
 
 ## Disclaimer
 I do not know C#/.NET, but I can write bits and pieces in C#/.NET. There are probably a lot of bugs, probably more than [250](http://www.ganssle.com/tem/tem299.html#article2). Hopefully I will learn a bit better the various [patterns](https://en.wikipedia.org/wiki/Design_Patterns) and the features of the language, resulting into less code -> less bugs!
