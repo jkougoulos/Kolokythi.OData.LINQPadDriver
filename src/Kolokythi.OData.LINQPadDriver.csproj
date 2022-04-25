@@ -5,7 +5,7 @@
     <AssemblyName>Kolokythi.OData.LINQPadDriver</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>linqpaddriver</PackageTags>
-	<VersionPrefix>0.3.0</VersionPrefix>
+	<VersionPrefix>0.3.1</VersionPrefix>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>NETCORE</DefineConstants>
@@ -14,7 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LINQPad.Reference" Version="1.*" />
-    <PackageReference Include="OData2Poco" Version="4.1.0" />
+    <PackageReference Include="OData2Poco" Version="4.2.1" />
     <PackageReference Include="Simple.OData.Client" Version="5.26.0" />
     <PackageReference Include="Uncapsulator" Version="2.0.0" />
   </ItemGroup>

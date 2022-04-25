@@ -238,12 +238,13 @@ namespace {nameSpace}
 
             string selfSource = GetThisSource( nameSpace, typeName, baseType, sourceMain + typeDefinitions );
 
-            string[] refPaths = GetCoreFxReferenceAssemblies().Union(new[] {
+            string[] refPaths = GetCoreFxReferenceAssemblies( cxInfo ).Union(new[] {
                             typeof(Microsoft.Spatial.GeographyPoint).Assembly.Location,
                             baseType.Assembly.Location
                         }).ToArray();
 
-       
+            
+
             string[] finalCodeArr = new[] {
                 sourceMain,
                 typeDefinitions,
@@ -399,6 +400,8 @@ namespace {nameSpace}
         { 
 
             // ugly hack, o2p expects a path to a file or url, no metadata in string
+            // fixed in o2p 4.2.1 :)
+            /*
             string tmpfile = Path.GetTempPath() + Guid.NewGuid() + ".xml";
             File.WriteAllText(tmpfile, _metadata);
 
@@ -406,19 +409,22 @@ namespace {nameSpace}
             {
                 ServiceUrl = tmpfile
             };
+            */
 
             var o2psetting = new OData2Poco.PocoSetting
             {
                 AddNavigation = true,
-                AddNullableDataType = true
+                AddNullableDataType = true,
+                ReadWrite = true
 
             };
 
             var o2p = new O2P(o2psetting);
 
-            string theCode = o2p.GenerateAsync(o2pconnstring).GetAwaiter().GetResult();
+//            string theCode = o2p.GenerateAsync(o2pconnstring).GetAwaiter().GetResult();
+            string theCode = o2p.GenerateAsync( _metadata ).GetAwaiter().GetResult();
             
-            File.Delete(tmpfile);
+ //           File.Delete(tmpfile);
 
             // here is an ugly hack to remove service namespaces if needed and "using xxx" from o2p
             string[] theCodeInLines = theCode
@@ -430,7 +436,7 @@ namespace {nameSpace}
                                         .ToArray();
 
             string theCodeFinal = string.Join(Environment.NewLine, theCodeInLines);
-            theCodeFinal = theCodeFinal.Replace("{get;}", "{get;set;}"); // workaround for o2p
+       //     theCodeFinal = theCodeFinal.Replace("{get;}", "{get;set;}"); // workaround for o2p (fixed in o2p 4.2.1 issue #41)
 
             return theCodeFinal;
         }
